@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>For Mouma 💜</title>
+
+<style>
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    font-family: 'Segoe UI', sans-serif;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: url("https://images.unsplash.com/photo-1526047932273-341f2a7631f9") no-repeat center center/cover;
+    overflow: hidden;
+}
+
+.overlay {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background: rgba(106, 13, 173, 0.55);
+    backdrop-filter: blur(6px);
+}
+
+.container {
+    position: relative;
+    background: rgba(255,255,255,0.15);
+    padding: 40px;
+    border-radius: 25px;
+    text-align: center;
+    color: white;
+    max-width: 400px;
+    width: 90%;
+    box-shadow: 0 15px 40px rgba(0,0,0,0.4);
+    z-index: 2;
+    animation: fadeIn 1.2s ease;
+}
+
+h1 {
+    margin-bottom: 30px;
+    font-weight: 600;
+}
+
+button {
+    padding: 12px 25px;
+    border: none;
+    border-radius: 30px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+#yesBtn {
+    background: #ff4da6;
+    color: white;
+    margin-right: 15px;
+}
+
+#yesBtn:hover {
+    transform: scale(1.1);
+    background: #ff1a8c;
+}
+
+#noBtn {
+    background: #333;
+    color: white;
+    position: absolute;
+}
+
+#message {
+    margin-top: 25px;
+    font-size: 17px;
+    line-height: 1.6;
+    min-height: 60px;
+    opacity: 0;
+    transition: 0.5s;
+}
+
+.showMessage {
+    opacity: 1 !important;
+}
+
+@keyframes fadeIn {
+    from {opacity: 0; transform: translateY(20px);}
+    to {opacity: 1; transform: translateY(0);}
+}
+
+@keyframes pop {
+    0% {transform: scale(1);}
+    50% {transform: scale(1.2);}
+    100% {transform: scale(1);}
+}
+
+@media (max-width: 500px) {
+    h1 {
+        font-size: 20px;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<div class="overlay"></div>
+
+<div class="container" id="box">
+    <h1>Marion chou la Belle des Belles,accepterais-tu d’être ma Valentine ? 💜</h1>
+    <button id="yesBtn" onclick="sayYes()">Oui</button>
+    <button id="noBtn">Non😝</button>
+    <div id="message"></div>
+</div>
+
+<audio id="music" autoplay loop>
+    <source src="https://www.bensound.com/bensound-music/bensound-romantic.mp3" type="audio/mpeg">
+</audio>
+
+<script>
+const noBtn = document.getElementById("noBtn");
+const box = document.getElementById("box");
+const message = document.getElementById("message");
+
+// Position initiale du bouton Non
+noBtn.style.top = "130px";
+noBtn.style.left = "200px";
+
+// Bouton qui s'enfuit
+noBtn.addEventListener("mouseover", function() {
+    const boxRect = box.getBoundingClientRect();
+
+    const maxX = boxRect.width - noBtn.offsetWidth;
+    const maxY = boxRect.height - noBtn.offsetHeight;
+
+    const randomX = Math.random() * maxX;
+    const randomY = Math.random() * maxY;
+
+    noBtn.style.left = randomX + "px";
+    noBtn.style.top = randomY + "px";
+});
+
+// Quand elle clique sur Oui
+function sayYes() {
+    message.innerHTML =
+        "Franchement, ça me fait vraiment plaisir que tu aies dit oui(Je mens hun).\n\n" +
+        "J’ai juste envie qu’on passe de bons moments ensemble, simplement comme on sait le faire d'ailleurs.\n" +
+        "Rien d’exagéré… juste moi chez toi, t'inquiète(j'ai pas pu résister pardon😂)💜";
+
+    message.classList.add("showMessage");
+
+    document.getElementById("yesBtn").style.animation = "pop 0.6s ease";
+
+    // Désactiver le bouton non
+    noBtn.style.display = "none";
+}
+</script>
+
+</body>
+</html>
